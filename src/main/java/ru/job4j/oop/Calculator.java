@@ -19,7 +19,7 @@ public class Calculator {
         return b / x;
     }
 
-    public int sumAll(int y,int z,int a,int b) {
+    public int sumAll(int y, int z, int a, int b) {
         return sum(y) + minus(z) + this.multiply(a) + this.divide(b);
     }
 
@@ -33,6 +33,6 @@ public class Calculator {
         System.out.println(minus);
         System.out.println(divide);
         System.out.println(multiply);
-        System.out.println(calc.sumAll(10,5,2,15));
+        System.out.println(calc.sumAll(10, 5, 2, 15));
     }
 }
