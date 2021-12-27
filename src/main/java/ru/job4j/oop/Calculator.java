@@ -19,7 +19,7 @@ public class Calculator {
         return b / x;
     }
 
-    public int sumAll(int y, int z, int a, int b) {
+    public int sumAll(int y,int z,int a,int b) {
         return sum(y) + minus(z) + this.multiply(a) + this.divide(b);
     }
 
