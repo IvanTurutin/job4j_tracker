@@ -4,6 +4,7 @@ public class Calculator {
     private static int x = 5;
 
     public static int sum(int y) {
+
         return x + y;
     }
 
@@ -12,6 +13,7 @@ public class Calculator {
     }
 
     public int multiply(int a) {
+
         return x * a;
     }
 
@@ -19,8 +21,8 @@ public class Calculator {
         return b / x;
     }
 
-    public int sumAll(int y, int z, int a, int b) {
-        return sum(y) + minus(z) + this.multiply(a) + this.divide(b);
+    public int sumAllOperation(int y) {
+        return sum(y) + minus(y) + this.multiply(y) + this.divide(y);
     }
 
     public static void main(String[] args) {
@@ -33,6 +35,6 @@ public class Calculator {
         System.out.println(minus);
         System.out.println(divide);
         System.out.println(multiply);
-        System.out.println(calc.sumAll(10, 5, 2, 15));
+        System.out.println(calc.sumAllOperation(10));
     }
 }
