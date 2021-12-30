@@ -19,4 +19,5 @@ public class Doctor extends Profession{
     public boolean getHaveGown() {
         return haveGown;
     }
+
 }

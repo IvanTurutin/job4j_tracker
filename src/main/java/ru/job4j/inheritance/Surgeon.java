@@ -17,4 +17,5 @@ public class Surgeon extends Doctor{
         HealthyPatient healthyPatient = new HealthyPatient();
         return healthyPatient;
     }
+
 }

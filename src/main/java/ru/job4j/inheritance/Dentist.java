@@ -17,5 +17,4 @@ public class Dentist extends Doctor{
         HealthyTeeth  healthyTeeth = new HealthyTeeth();
         return healthyTeeth;
     }
-
 }

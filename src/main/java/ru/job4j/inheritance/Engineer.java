@@ -18,4 +18,5 @@ public class Engineer extends Profession {
     public boolean getHaveComputer() {
         return haveComputer;
     }
+
 }

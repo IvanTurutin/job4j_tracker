@@ -17,4 +17,5 @@ public class Builder extends Engineer{
     public boolean getHaveRuler() {
         return haveRuler;
     }
+
 }
