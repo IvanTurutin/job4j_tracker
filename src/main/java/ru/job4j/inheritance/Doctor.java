@@ -2,7 +2,7 @@ package ru.job4j.inheritance;
 
 import java.util.Calendar;
 
-public class Doctor extends Profession{
+public class Doctor extends Profession {
 
     private boolean haveGown;
 
