@@ -11,25 +11,22 @@ public class Library {
         books[1] = clean;
         books[2] = master;
         books[3] = rat;
-
-        for(int i = 0; i < books.length; i++) {
-            System.out.println(books[i].getName() + ", " + books[i].getPages() + " стр.");
-        }
-
+        print(books);
         books[0] = rat;
         books[3] = war;
-        System.out.println();
+        print(books);
 
-        for(int i = 0; i < books.length; i++) {
-            System.out.println(books[i].getName() + ", " + books[i].getPages() + " стр.");
-        }
-        System.out.println();
-
-
-        for(int i = 0; i < books.length; i++) {
+        for (int i = 0; i < books.length; i++) {
             if (books[i].getName().equals("Clean code")) {
                 System.out.println(books[i].getName() + ", " + books[i].getPages() + " стр.");
             }
         }
+    }
+
+    public static void print(Book[] books) {
+        for (int i = 0; i < books.length; i++) {
+            System.out.println(books[i].getName() + ", " + books[i].getPages() + " стр.");
+        }
+        System.out.println();
     }
 }
