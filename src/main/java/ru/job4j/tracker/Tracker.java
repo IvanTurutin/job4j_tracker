@@ -38,7 +38,7 @@ public class Tracker {
         return itemsWithoutNull;
     }
 
-    public Item[] findByName(String key){
+    public Item[] findByName(String key) {
         Item[] itemsWithoutNull = new Item[size];
         int count = 0;
         for (int i = 0; i < size; i++) {
