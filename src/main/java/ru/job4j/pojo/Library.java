@@ -15,12 +15,7 @@ public class Library {
         books[0] = rat;
         books[3] = war;
         print(books);
-
-        for (int i = 0; i < books.length; i++) {
-            if (books[i].getName().equals("Clean code")) {
-                System.out.println(books[i].getName() + ", " + books[i].getPages() + " стр.");
-            }
-        }
+        find(books, "Clean code");
     }
 
     public static void print(Book[] books) {
@@ -28,5 +23,13 @@ public class Library {
             System.out.println(books[i].getName() + ", " + books[i].getPages() + " стр.");
         }
         System.out.println();
+    }
+
+    public static void find(Book[] books, String find) {
+        for (int i = 0; i < books.length; i++) {
+            if (books[i].getName().equals(find)) {
+                System.out.println(books[i].getName() + ", " + books[i].getPages() + " стр.");
+            }
+        }
     }
 }
