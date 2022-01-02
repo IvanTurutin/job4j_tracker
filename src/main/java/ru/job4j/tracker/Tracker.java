@@ -34,19 +34,17 @@ public class Tracker {
                 itemsWithoutNull[count++] = items[i];
             }
         }
-        itemsWithoutNull = Arrays.copyOf(itemsWithoutNull, count);
-        return itemsWithoutNull;
+        return Arrays.copyOf(itemsWithoutNull, count);
     }
 
     public Item[] findByName(String key) {
-        Item[] itemsWithoutNull = new Item[size];
+        Item[] result = new Item[size];
         int count = 0;
         for (int i = 0; i < size; i++) {
             if (items[i].getName().equals(key)) {
-                itemsWithoutNull[count++] = items[i];
+                result[count++] = items[i];
             }
         }
-        itemsWithoutNull = Arrays.copyOf(itemsWithoutNull, count);
-        return itemsWithoutNull;
+        return Arrays.copyOf(result, count);
     }
 }
