@@ -47,7 +47,18 @@ public class StartUITest {
         String[] answers = {"1"};
         StartUI.deleteItem(new StubInput(answers), tracker);
         Item deleted = tracker.findById(Integer.parseInt(answers[0]));
-        Item nullItem = null;
-        assertThat(deleted,  is(nullItem));
+        assertNull(deleted);
+    }
+
+    @Test
+    public void whenDeleteItem2() {
+        Tracker tracker = new Tracker();
+        Item item = new Item("new item");
+        tracker.add(item);
+        tracker.add(item);
+        String[] answers = {"1"};
+        StartUI.deleteItem(new StubInput(answers), tracker);
+        Item deleted = tracker.findById(2);
+        assertNotNull(deleted);
     }
 }
