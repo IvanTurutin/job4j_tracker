@@ -88,7 +88,6 @@ public class StartUI {
             }
         } else {
             System.out.println("Заявка с именем: " + name + " не найдена.");
-
         }
     }
 
