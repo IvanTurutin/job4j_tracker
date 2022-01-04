@@ -44,7 +44,7 @@ public class StartUITest {
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
         tracker.add(item);
-        String[] answers = {"1"};
+        String[] answers = {String.valueOf(item.getId())};
         StartUI.deleteItem(new StubInput(answers), tracker);
         Item deleted = tracker.findById(Integer.parseInt(answers[0]));
         assertNull(deleted);
@@ -54,11 +54,12 @@ public class StartUITest {
     public void whenDeleteItem2() {
         Tracker tracker = new Tracker();
         Item item = new Item("new item");
+        Item item2 = new Item("second item");
         tracker.add(item);
-        tracker.add(item);
-        String[] answers = {"1"};
+        tracker.add(item2);
+        String[] answers = {String.valueOf(item.getId())};
         StartUI.deleteItem(new StubInput(answers), tracker);
-        Item deleted = tracker.findById(2);
+        Item deleted = tracker.findById(item2.getId());
         assertNotNull(deleted);
     }
 }
