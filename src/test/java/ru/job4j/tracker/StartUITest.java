@@ -20,6 +20,7 @@ public class StartUITest {
         new StartUI().init(in, tracker, actions);
         assertThat(tracker.findAll()[0].getName(), is("Item name"));
     }
+
     @Test
     public void whenEditItem() {
         Tracker tracker = new Tracker();
