@@ -37,22 +37,20 @@ public class Tracker {
     }
 
     public boolean replace(int id, Item item) {
-        for (Item i : items) {
-            if (i != null && i.getId() == id) {
-                item.setId(id);
-                items.set(items.indexOf(i), item);
-                return true;
-            }
+        Item i = findById(id);
+        if (i != null) {
+            item.setId(id);
+            items.set(items.indexOf(i), item);
+            return true;
         }
         return false;
     }
 
     public boolean delete(int id) {
-        for (Item item : items) {
-            if (item != null && item.getId() == id) {
-                items.remove(item);
-                return true;
-            }
+        Item i = findById(id);
+        if (i != null) {
+            items.remove(i);
+            return true;
         }
         return false;
     }
