@@ -14,16 +14,12 @@ public class Tracker {
     }
 
     public Item findById(int id) {
-        for (Item item : items) {
-            if (item != null && item.getId() == id) {
-                return item;
-            }
-        }
-        return null;
+        int index = indexOf(id);
+        return index != -1 ? items.get(index) : null;
     }
 
     public List<Item> findAll() {
-        return items;
+        return List.copyOf(items);
     }
 
     public List<Item> findByName(String key) {
@@ -53,5 +49,16 @@ public class Tracker {
             return true;
         }
         return false;
+    }
+
+    private int indexOf(int id) {
+        int rsl = -1;
+        for (int index = 0; index < items.size(); index++) {
+            if (items.get(index).getId() == id) {
+                rsl = index;
+                break;
+            }
+        }
+        return rsl;
     }
 }
