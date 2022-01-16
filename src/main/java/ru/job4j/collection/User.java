@@ -2,7 +2,7 @@ package ru.job4j.collection;
 
 import java.util.Objects;
 
-public class User implements Comparable {
+public class User implements Comparable<User> {
     private String name;
     private int age;
 
@@ -24,10 +24,9 @@ public class User implements Comparable {
     }
 
     @Override
-    public int compareTo(Object o) {
-        User user = (User) o;
-        int rsl = name.compareTo(user.name);
-        return rsl != 0 ? rsl : age - user.age;
+    public int compareTo(User o) {
+        int rsl = name.compareTo(o.name);
+        return rsl != 0 ? rsl : Integer.compare(age, o.age);
     }
 
     @Override
