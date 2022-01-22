@@ -30,4 +30,5 @@ public class FunctionsTest {
         List<Double> expected = Arrays.asList(33D, 65D, 129D);
         assertThat(result, is(expected));
     }
+
 }
