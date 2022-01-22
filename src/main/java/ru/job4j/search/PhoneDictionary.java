@@ -11,6 +11,7 @@ public class PhoneDictionary {
     }
 
     public ArrayList<Person> find(String key) {
+
         Predicate<Person> predName = person -> person.getName().contains(key);
         Predicate<Person> predSurname = person -> person.getSurname().contains(key);
         Predicate<Person> predPhone = person -> person.getPhone().contains(key);
