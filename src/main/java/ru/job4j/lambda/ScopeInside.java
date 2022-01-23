@@ -8,7 +8,8 @@ public class ScopeInside {
         int[] number = {1, 2, 3};
         int total = 0;
         for (int i : number) {
-            total = add(total, (sum) -> i + sum);
+            int sum = total;
+            total = add(() -> sum + i);
         }
         System.out.println(total);
     }
@@ -16,9 +17,4 @@ public class ScopeInside {
     private static Integer add(Supplier<Integer> calc) {
         return calc.get();
     }
-
-    private static Integer add(Integer total, Function<Integer, Integer> calc) {
-        return calc.apply(total);
-    }
-
 }
