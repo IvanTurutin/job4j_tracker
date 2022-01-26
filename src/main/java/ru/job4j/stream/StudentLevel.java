@@ -12,5 +12,4 @@ public class StudentLevel {
                 .takeWhile(st -> st.getScore() > bound)
                 .collect(Collectors.toList());
     }
-
 }
