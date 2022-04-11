@@ -54,13 +54,11 @@ public class SqlTracker implements Store, AutoCloseable {
             ps.setString(1, item.getName());
             ps.setTimestamp(2, timestampFromLDT);
             ps.execute();
-
             try (ResultSet generatedKeys = ps.getGeneratedKeys()) {
                 if (generatedKeys.next()) {
                     item.setId(generatedKeys.getInt(1));
                 }
             }
-
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -72,16 +70,13 @@ public class SqlTracker implements Store, AutoCloseable {
         boolean rsl = false;
         Timestamp timestampFromLDT = Timestamp.valueOf(item.getCreate());
         String query = String.format("update %s set name = ?, date = ? where id = ?", table);
-        if (findById(id) != null) {
-            try (PreparedStatement ps = cn.prepareStatement(query)) {
-                ps.setString(1, item.getName());
-                ps.setTimestamp(2, timestampFromLDT);
-                ps.setInt(3, id);
-                ps.execute();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            rsl = true;
+        try (PreparedStatement ps = cn.prepareStatement(query)) {
+            ps.setString(1, item.getName());
+            ps.setTimestamp(2, timestampFromLDT);
+            ps.setInt(3, id);
+            rsl = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return rsl;
     }
@@ -90,52 +85,63 @@ public class SqlTracker implements Store, AutoCloseable {
     public boolean delete(int id) {
         boolean rsl = false;
         String query = String.format("delete from %s where id = ?", table);
-        if (findById(id) != null) {
-            try (PreparedStatement ps = cn.prepareStatement(query)) {
-                ps.setInt(1, id);
-                ps.execute();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-            rsl = true;
+        try (PreparedStatement ps = cn.prepareStatement(query)) {
+            ps.setInt(1, id);
+            rsl = ps.executeUpdate() > 0;
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return rsl;
     }
 
     @Override
     public List<Item> findAll() {
+        List<Item> items = new ArrayList<>();
         String query = String.format("select * from %s", table);
-        return selectQuery(query);
+        try (PreparedStatement ps = cn.prepareStatement(query)) {
+            items = getItems(ps);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
     }
 
     @Override
     public List<Item> findByName(String key) {
-        String query = String.format("select * from %s where name = '%s'", table, key);
-        return selectQuery(query);
+        List<Item> items = new ArrayList<>();
+        String query = String.format("select * from %s where name = ?", table);
+        try (PreparedStatement ps = cn.prepareStatement(query)) {
+            ps.setString(1, key);
+            items = getItems(ps);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return items;
     }
 
     @Override
     public Item findById(int id) {
         Item item = null;
-        String query = String.format("select * from %s where id = %d", table, id);
-        List<Item> items = selectQuery(query);
-        if (!items.isEmpty()) {
-            item = items.get(0);
+        String query = String.format("select * from %s where id = ?", table);
+        try (PreparedStatement ps = cn.prepareStatement(query)) {
+            ps.setInt(1, id);
+            List<Item> items = getItems(ps);
+            item = items.isEmpty() ? null : items.get(0);
+        } catch (SQLException e) {
+            e.printStackTrace();
         }
         return item;
     }
 
-    private List<Item> selectQuery(String query) {
+    private List<Item> getItems(PreparedStatement ps) {
         List<Item> items = new ArrayList<>();
-        try (PreparedStatement ps = cn.prepareStatement(query)) {
-            try (ResultSet resultSet = ps.executeQuery()) {
-                while (resultSet.next()) {
-                    items.add(new Item(
-                            resultSet.getInt("id"),
-                            resultSet.getString("name"),
-                            resultSet.getTimestamp("date").toLocalDateTime()
-                    ));
-                }
+        try (ResultSet resultSet = ps.executeQuery()) {
+            while (resultSet.next()) {
+                items.add(new Item(
+                        resultSet.getInt("id"),
+                        resultSet.getString("name"),
+                        resultSet.getTimestamp("date").toLocalDateTime()
+                ));
             }
         } catch (SQLException e) {
             e.printStackTrace();
