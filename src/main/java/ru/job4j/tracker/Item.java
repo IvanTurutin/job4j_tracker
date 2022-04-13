@@ -11,13 +11,13 @@ public class Item {
     private static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd-MMMM-EEEE-yyyy HH:mm:ss");
 
     public Item() {
-        this.create = LocalDateTime.now();
+        this.create = LocalDateTime.now().withNano(3);
     }
 
     public Item(int id, String name, LocalDateTime create) {
         this.id = id;
         this.name = name;
-        this.create = create;
+        this.create = create.withNano(3);
     }
 
     public Item(String name) {
@@ -26,8 +26,8 @@ public class Item {
     }
 
     public Item(int id, String name) {
+        this(name);
         this.id = id;
-        this.name = name;
     }
 
     public int getId() {

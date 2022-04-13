@@ -20,6 +20,14 @@ public class SqlTracker implements Store, AutoCloseable {
     private Connection cn;
     private String table;
 
+    public SqlTracker() {
+    }
+
+    public SqlTracker(Connection cn, String table) {
+        this.cn = cn;
+        this.table = table;
+    }
+
     public void init() {
         try (InputStream in = SqlTracker.class.getClassLoader().getResourceAsStream("app.properties")) {
             Properties config = new Properties();
@@ -135,7 +143,7 @@ public class SqlTracker implements Store, AutoCloseable {
             ps.setInt(1, id);
             try (ResultSet resultSet = ps.executeQuery()) {
                 if (resultSet.next()) {
-                    item= getItem(resultSet);
+                    item = getItem(resultSet);
                 }
             }
         } catch (SQLException e) {
