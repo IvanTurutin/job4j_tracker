@@ -2,9 +2,11 @@ package ru.job4j.tracker;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class MemTest {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
+        TimeUnit.SECONDS.sleep(10);
         int amount = 1000000;
         String[] strings = generateInput(4);
         Output out = new ConsoleOutput();
