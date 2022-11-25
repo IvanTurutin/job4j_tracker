@@ -244,12 +244,12 @@ public class StartUITest {
 
         Input input = mock(Input.class);
 
-        UserAction deleteAction =new DeleteAction(out);
+        UserAction deleteAction = new DeleteAction(out);
         deleteAction.execute(input, tracker);
 
         String ln = System.lineSeparator();
         assertThat(out.toString(), is("=== Delete item ===" + ln + "Ошибка удаления заявки." + ln));
-        assertThat(tracker.findAll().size(),is(1));
+        assertThat(tracker.findAll().size(), is(1));
 
         when(input.askInt(any(String.class))).thenReturn(1);
 
@@ -257,7 +257,7 @@ public class StartUITest {
 
         assertThat(out.toString(), is("=== Delete item ===" + ln + "Ошибка удаления заявки." + ln
                 + "=== Delete item ===" + ln + "Заявка удалена успешно." + ln));
-        assertThat(tracker.findAll().size(),is(0));
+        assertThat(tracker.findAll().size(), is(0));
     }
 
     @Test
@@ -272,7 +272,7 @@ public class StartUITest {
 
         when(input.askInt(any(String.class))).thenReturn(missingId);
 
-        UserAction action =new FindByIdAction(out);
+        UserAction action = new FindByIdAction(out);
         action.execute(input, tracker);
 
         String ln = System.lineSeparator();
@@ -300,7 +300,7 @@ public class StartUITest {
 
         when(input.askStr(any(String.class))).thenReturn(missingName);
 
-        UserAction action =new FindByNameAction(out);
+        UserAction action = new FindByNameAction(out);
         action.execute(input, tracker);
 
         String ln = System.lineSeparator();
@@ -315,6 +315,5 @@ public class StartUITest {
                 + "Заявка с именем: " + missingName + " не найдена." + ln
                 + "=== Find items by name ===" + ln + "Искомая(ые) заявка(и): " + ln + item + ln));
     }
-
 
 }
