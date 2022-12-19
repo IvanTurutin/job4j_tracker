@@ -53,7 +53,7 @@ public class SqlTracker implements Store, AutoCloseable {
 
     @Override
     public Item add(Item item) {
-        Timestamp timestampFromLDT = Timestamp.valueOf(item.getCreate());
+        Timestamp timestampFromLDT = Timestamp.valueOf(item.getDate());
         String query = String.format("insert into %s (name, date) values (?, ?)", table);
         try (PreparedStatement ps = cn.prepareStatement(
                 query,
@@ -76,7 +76,7 @@ public class SqlTracker implements Store, AutoCloseable {
     @Override
     public boolean replace(int id, Item item) {
         boolean rsl = false;
-        Timestamp timestampFromLDT = Timestamp.valueOf(item.getCreate());
+        Timestamp timestampFromLDT = Timestamp.valueOf(item.getDate());
         String query = String.format("update %s set name = ?, date = ? where id = ?", table);
         try (PreparedStatement ps = cn.prepareStatement(query)) {
             ps.setString(1, item.getName());
