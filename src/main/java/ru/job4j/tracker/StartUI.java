@@ -48,6 +48,7 @@ public class StartUI {
     }
     */
 
+/*
     public static void main(String[] args) {
         Output out = new ConsoleOutput();
         Input input = new ValidateInput(out, new ConsoleInput());
@@ -67,4 +68,25 @@ public class StartUI {
             e.printStackTrace();
         }
     }
+*/
+
+    public static void main(String[] args) {
+        Output out = new ConsoleOutput();
+        Input input = new ValidateInput(out, new ConsoleInput());
+        try (HbmTracker tracker = new HbmTracker()) {
+            List<UserAction> actions = List.of(
+                    new CreateAction(out),
+                    new ShowAllAction(out),
+                    new EditAction(out),
+                    new DeleteAction(out),
+                    new FindByIdAction(out),
+                    new FindByNameAction(out),
+                    new ExitAction(out)
+            );
+            new StartUI(out).init(input, tracker, actions);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 }
