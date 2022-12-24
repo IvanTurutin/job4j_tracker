@@ -16,7 +16,6 @@ import java.util.Properties;
 import static org.hamcrest.Matchers.is;
 import static org.hamcrest.Matchers.nullValue;
 import static org.junit.Assert.assertThat;
-import static org.junit.Assert.assertTrue;
 
 public class SqlTrackerTest {
 
@@ -32,10 +31,14 @@ public class SqlTrackerTest {
                     config.getProperty("url"),
                     config.getProperty("username"),
                     config.getProperty("password")
-
             );
         } catch (Exception e) {
             throw new IllegalStateException(e);
+        }
+        try (PreparedStatement statement = connection.prepareStatement("delete from items")) {
+            statement.execute();
+        } catch (Exception e) {
+            System.out.println(e);
         }
     }
 
