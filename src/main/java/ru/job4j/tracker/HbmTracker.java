@@ -25,11 +25,10 @@ public class HbmTracker implements Store, AutoCloseable {
 
     public static final String ITEM_MODEL = "Item";
     public static final String NAME = "fName";
-    public static final String DATE = "fDate";
     public static final String ID = "fID";
     public static final String REPLACE_STATEMENT = String.format(
-            "UPDATE %s SET name = :%s, date = :%s WHERE id = :%s",
-            ITEM_MODEL, NAME, DATE, ID
+            "UPDATE %s SET name = :%s WHERE id = :%s",
+            ITEM_MODEL, NAME, ID
     );
     public static final String DELETE_STATEMENT = String.format(
             "DELETE %s WHERE id = :%s",
