@@ -1,29 +1,33 @@
 package ru.job4j.toone;
 
-import javax.persistence.*;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.EqualsAndHashCode.Include;
+import lombok.*;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
+import javax.persistence.*;
 import java.util.List;
 
-@Data
-@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
+@Getter
+@Setter
+@ToString
+@EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Table(name = "j_users")
+@NoArgsConstructor
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Include
+    @EqualsAndHashCode.Include
     private int id;
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "role_id")
     private Role role;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @Fetch(FetchMode.SUBSELECT)
     @JoinColumn(name = "j_user_id")
     private List<UserMessenger> messengers;
 }
